@@ -1,0 +1,58 @@
+﻿@model List<Libro>
+
+@{
+    int numeroregistros = (int)ViewData["REGISTROS"];
+    int numeropagina = 1;
+}
+
+<h1>Paginar grupo Libros</h1>
+
+<ul class="list-group list-group-horizontal">
+    @for (int i = 1; i <= numeroregistros; i += 3)
+    {
+        <li class="list-group-item list-group-item-warning">
+            <a asp-controller="Tienda"
+           asp-action="PaginarGrupoLibros"
+           asp-route-posicion="@i">
+                Página @numeropagina
+            </a>
+        </li>
+        numeropagina += 1;
+    }
+</ul>
+
+
+<table class="table table-info">
+    <thead>
+        <tr>
+            <th>IDLIBRO</th>
+            <th>TITULO</th>
+            <th>AUTOR</th>
+            <th>DETALLES</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdLibro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Autor)
+                </td>
+                <td>
+                                    <a class="dropdown-item"
+               asp-controller="Tienda"
+               asp-action="Detalles"
+                   asp-route-idLibro="@item.IdLibro">
+                    Detalles
+                </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

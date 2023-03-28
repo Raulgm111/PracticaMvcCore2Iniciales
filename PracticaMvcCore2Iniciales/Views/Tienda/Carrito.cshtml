@@ -1,0 +1,47 @@
+﻿@model List<Libro>
+
+    <h1>Carrito</h1>
+    @if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                Nombre
+                </th>
+                <th>
+                Precio
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Titulo
+                    </td>
+                    <td>
+                        @item.Precio
+                    </td>
+                    <td>
+                    <a class="btn btn-outline-danger" asp-action="Carrito" asp-controller="Tienda" asp-route-idCarrito="@item.IdLibro">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form method="post" asp-action="Pedidos">
+        <button class="w-full border-0 py-2 px-6 focus:outline-none font-semibold rounded bn632-hover bn18">
+            Finalizar Compra
+        </button>
+    </form>
+}
+else
+{
+    <p style="color:red">Carrito vacio</p>
+}

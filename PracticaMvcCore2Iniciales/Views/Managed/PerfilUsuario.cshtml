@@ -1,0 +1,18 @@
+﻿@using System.Security.Claims;
+
+<h1 Perfil Empleado:></h1>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        Nombre:@Context.User.FindFirst("Nombre")?.Value
+    </li>
+    <li class="list-group-item">
+        Apellidos: @Context.User.FindFirst("Apellidos")?.Value
+    </li>
+    <li class="list-group-item">
+        <img src="Imagen: @Context.User.@Context.User.FindFirst("Imagen")?.Value" />
+    </li>
+    <li class="list-group-item">
+        Email: @Context.User.FindFirst(ClaimTypes.Name).Value
+    </li>
+</ul>
